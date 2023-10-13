@@ -1,10 +1,12 @@
 import './App.css';
+import { Navbar } from './components/navbar';
+import {  Flowbite } from 'flowbite-react';
 
 function App() {
   return (
-    <>
-      <a href='http://localhost:3000/auth/login'>Login</a>
-    </>
+    <Flowbite>
+      <Navbar />
+    </Flowbite>
   );
 }
 
