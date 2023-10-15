@@ -3,6 +3,9 @@ import jwtDecode from "jwt-decode";
 export interface UserInfo {
     isAdmin: boolean,
     nickname: string,
+    username: string,
+    avatarHash: string,
+    userID: string,
     exp: number,
     iat: number,
 }
