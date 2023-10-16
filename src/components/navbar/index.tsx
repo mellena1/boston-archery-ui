@@ -1,6 +1,8 @@
 import { CustomFlowbiteTheme, DarkThemeToggle as FlowbiteDarkThemeToggle, Navbar as FlowbiteNavbar, NavbarLinkProps } from "flowbite-react";
 import { Login } from "./login";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext, isValid } from "@state/auth";
 
 export function Navbar() {
     const customTheme: CustomFlowbiteTheme['navbar'] = {
@@ -8,6 +10,8 @@ export function Navbar() {
             base: 'px-2 py-2.5 sm:px-4 border-b-2 border-yellow-300 bg-emerald-900 shadow-lg',
         }
     };
+    const location = useLocation();
+    const { authState } = useContext(AuthContext);
 
     return (
         <FlowbiteNavbar theme={customTheme.root} fluid>
@@ -20,13 +24,10 @@ export function Navbar() {
                 <NavbarToggle />
             </div>
             <FlowbiteNavbar.Collapse>
-                <NavbarLink as={Link} to={'/'} active>
+                <NavbarLink as={Link} to={'/'} active={location.pathname === '/'}>
                     Home
                 </NavbarLink>
-                <NavbarLink href="#">About</NavbarLink>
-                <NavbarLink href="#">Services</NavbarLink>
-                <NavbarLink href="#">Pricing</NavbarLink>
-                <NavbarLink href="#">Contact</NavbarLink>
+                {isValid(authState) ? <NavbarLink as={Link} to={'/admin'} active={location.pathname.startsWith('/admin')}>Admin</NavbarLink> : <></>}
             </FlowbiteNavbar.Collapse>
         </FlowbiteNavbar>
     );
@@ -36,8 +37,8 @@ function NavbarLink(props: NavbarLinkProps) {
     const customTheme: CustomFlowbiteTheme['navbar'] = {
         link: {
             active: {
-                on: 'text-white border-b-2 rounded-sm border-yellow-300 md:bg-transparent',
-                off: 'border-b border-gray-400 hover:bg-gray-400 text-gray-300 hover:text-white md:border-0 md:hover:bg-transparent md:hover:text-white',
+                on: 'text-white border-b-2 leading-loose rounded-sm border-yellow-300 md:bg-transparent',
+                off: 'border-b border-gray-400 leading-loose hover:bg-gray-400 text-gray-300 hover:text-white md:border-0 md:hover:bg-transparent md:hover:text-white',
             }
         }
     };

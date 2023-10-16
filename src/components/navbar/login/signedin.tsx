@@ -1,6 +1,6 @@
 import { Avatar as FlowbiteAvatar, Dropdown, AvatarProps, CustomFlowbiteTheme } from "flowbite-react";
 import { useContext } from "react";
-import { AuthActionTypes, AuthContext, AuthState } from "../../../state";
+import { AuthActionTypes, AuthContext, AuthState } from "@state/auth";
 
 const DISCORD_CDN = 'https://cdn.discordapp.com';
 const AVATAR_SIZE = 64;
@@ -17,8 +17,8 @@ export function SignedIn() {
             }
         >
             <Dropdown.Header>
-                <span className="block text-sm">{authState?.userInfo?.nickname}</span>
-                <span className="block truncate text-sm font-medium">{authState?.userInfo?.username}</span>
+                <span className="block text-sm">{authState?.userInfo.nickname}</span>
+                <span className="block truncate text-sm font-medium">{authState?.userInfo.username}</span>
             </Dropdown.Header>
             <Dropdown.Item onClick={() => { setAuth({ type: AuthActionTypes.DELETE }); }}>Sign out</Dropdown.Item>
         </Dropdown>
@@ -26,7 +26,7 @@ export function SignedIn() {
 }
 
 function avatarLink(authState: AuthState): string {
-    if (!authState?.userInfo?.userID || !authState.userInfo.avatarHash) {
+    if (!authState?.userInfo.userID || !authState.userInfo.avatarHash) {
         return `${DISCORD_CDN}/embed/avatars/index.png?size=${AVATAR_SIZE}`;
     }
 

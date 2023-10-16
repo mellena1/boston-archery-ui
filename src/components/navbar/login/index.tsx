@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext, AuthState } from "../../../state";
+import { AuthContext, isValid } from "@state/auth";
 import { LoginButton } from "./loginbutton";
 import { SignedIn } from "./signedin";
 
@@ -8,14 +8,7 @@ export function Login() {
 
     return (
         <>
-            {isLoggedIn(authState) ? <SignedIn /> : <LoginButton /> }
+            {isValid(authState) ? <SignedIn /> : <LoginButton /> }
         </>
     );
-}
-
-function isLoggedIn(authState: AuthState): boolean {
-    if (authState?.isExpired === undefined) {
-        return false;
-    }
-    return !authState.isExpired;
 }

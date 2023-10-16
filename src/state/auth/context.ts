@@ -5,6 +5,6 @@ export const AuthContext = createContext<{
     authState: AuthState,
     setAuth: React.Dispatch<AuthAction>
 }>({
-    authState: {},
+    authState: undefined,
     setAuth: (_) => {}
 });

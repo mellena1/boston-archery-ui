@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { AuthActionTypes, AuthContext } from "../../state";
+import { AuthActionTypes, AuthContext } from "@state/auth";
 
 export function Login() {
     const { setAuth } = useContext(AuthContext);

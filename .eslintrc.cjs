@@ -32,7 +32,8 @@ module.exports = {
         "caughtErrorsIgnorePattern": "^_"
       }
     ],
-    '@typescript-eslint/no-empty-function': 'off'
+    '@typescript-eslint/no-empty-function': 'off',
+    "react/no-unescaped-entities": ["error", {"forbid": [">", "}"]}],
   },
   settings: {
     "react": {

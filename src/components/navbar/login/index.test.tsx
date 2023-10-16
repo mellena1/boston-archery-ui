@@ -1,5 +1,5 @@
 import renderer from 'react-test-renderer';
-import { AuthContext, AuthState } from '../../../state';
+import { AuthContext, AuthState } from '@state/auth';
 import { Login } from '.';
 import { LoginButton } from './loginbutton';
 import { SignedIn } from './signedin';
@@ -21,14 +21,14 @@ describe("Login Page", () => {
     });
 
     it("should display signed in with valid token", () => {
-        const component = renderer.create(<TestLogin authState={ { isExpired: false } } />);
+        const component = renderer.create(<TestLogin authState={ { isExpired: false } as never } />);
         const testInstance = component.root;
 
         expect(testInstance.findByType(SignedIn)).toBeDefined();
     });
 
     it("should display login button with expired token", () => {
-        const component = renderer.create(<TestLogin authState={ { isExpired: true } } />);
+        const component = renderer.create(<TestLogin authState={ { isExpired: true } as never } />);
         const testInstance = component.root;
 
         expect(testInstance.findByType(LoginButton)).toBeDefined();

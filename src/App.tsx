@@ -1,11 +1,13 @@
 import './App.css';
 import { CustomFlowbiteTheme, Flowbite } from 'flowbite-react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Layout } from './pages/layout';
-import { Home } from './pages/home';
+import { Layout } from '@pages/layout';
+import { Home } from '@pages/home';
 import { useEffect, useReducer } from 'react';
-import { AuthContext, AuthReducer, getAuthStateFromLS } from './state';
-import { Login } from './pages/login';
+import { AuthContext, AuthReducer, getAuthStateFromLS } from '@state/auth';
+import { Login } from '@pages/login';
+import { ProtectedRoute } from '@components/protected-route';
+import { Admin } from '@pages/admin';
 
 function App() {
   const [authState, authDispatch] = useReducer(AuthReducer, getAuthStateFromLS());
@@ -18,7 +20,7 @@ function App() {
   const customTheme: CustomFlowbiteTheme = {
     button: {
       color: {
-        yellow: 'bg-yellow-300 text-black enabled:hover:bg-yellow-100 focus:ring-4 focus:ring-yellow-300'
+        yellow: 'bg-yellow-300 text-black enabled:hover:bg-yellow-100 focus:ring-4 focus:ring-yellow-300',
       }
     },
     dropdown: {
@@ -29,22 +31,40 @@ function App() {
         }
       }
     },
+    tab: {
+      tablist: {
+        tabitem: {
+          base: 'flex items-center justify-center p-4 rounded-t-lg text-sm font-medium first:ml-0 disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500',
+          styles: {
+            underline: {
+              active: {
+                on: 'text-emerald-900 rounded-t-lg border-b-2 border-emerald-900 active dark:text-yellow-300 dark:border-yellow-300',
+              }
+            }
+          }
+        }
+      }
+    }
   };
 
   return (
-    <Flowbite theme={ { theme: customTheme } }>
-        <AuthContext.Provider value={{
-          authState, setAuth: authDispatch
-        }}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route index element={<Home />} />
-                <Route path="/login" element={<Login />} />
+    <Flowbite theme={{ theme: customTheme }}>
+      <AuthContext.Provider value={{
+        authState, setAuth: authDispatch
+      }}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/admin" element={<ProtectedRoute isAllowed={info => info.isAdmin} />} >
+                <Route index element={<Admin />} />
               </Route>
-            </Routes>
-          </BrowserRouter>
-        </AuthContext.Provider>
+            </Route>
+            <Route path="*" element={<p>There is nothing here: 404!</p>} />
+          </Routes>
+        </BrowserRouter>
+      </AuthContext.Provider>
     </Flowbite>
   );
 }
