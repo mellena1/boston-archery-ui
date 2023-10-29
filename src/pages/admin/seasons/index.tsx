@@ -1,3 +1,3 @@
 export function AdminSeasons() {
-    return (<div>Hello World</div>);
+  return <div>Hello World</div>;
 }

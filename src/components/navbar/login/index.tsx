@@ -4,11 +4,7 @@ import { LoginButton } from "./loginbutton";
 import { SignedIn } from "./signedin";
 
 export function Login() {
-    const { authState } = useContext(AuthContext);
+  const { authState } = useContext(AuthContext);
 
-    return (
-        <>
-            {isValid(authState) ? <SignedIn /> : <LoginButton /> }
-        </>
-    );
+  return <>{isValid(authState) ? <SignedIn /> : <LoginButton />}</>;
 }

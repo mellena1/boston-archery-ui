@@ -1,3 +1,6 @@
 build
 coverage
-node_modules
+src/vite-env.d.ts
+*.config.*
+.eslintrc.cjs
+jest.setup.ts
