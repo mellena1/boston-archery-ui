@@ -10,12 +10,14 @@ import { ProtectedRoute } from "@components/protected-route";
 import { AdminLayout } from "@pages/admin";
 import { useAuthToken } from "@hooks/auth";
 import { AdminSeasons } from "@pages/admin/seasons";
+import { useTitle } from "react-use";
+import { AdminTeams } from "@pages/admin/teams";
 
 function App() {
   const [authState, authDispatch] = useAuthToken();
+  useTitle("Boston AG League");
 
   useEffect(() => {
-    document.title = "Boston AG League";
     document.body.classList.add("dark:bg-zinc-950", "dark:text-gray-300");
   });
 
@@ -73,6 +75,7 @@ function App() {
                     element={<Navigate to="/admin/seasons" replace />}
                   />
                   <Route path="seasons" element={<AdminSeasons />} />
+                  <Route path="teams" element={<AdminTeams />} />
                 </Route>
               </Route>
             </Route>

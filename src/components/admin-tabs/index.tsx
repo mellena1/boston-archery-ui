@@ -1,10 +1,11 @@
 import { Tabs } from "flowbite-react";
-import { useNavigate } from "react-router-dom";
+import { Location, useLocation, useNavigate } from "react-router-dom";
+
+const paths = ["/admin/seasons", "/admin/teams"];
 
 export function AdminTabs() {
   const navigate = useNavigate();
-
-  const paths = ["/admin/seasons", "/admin/teams"];
+  const location = useLocation();
 
   return (
     <Tabs.Group
@@ -14,8 +15,12 @@ export function AdminTabs() {
         navigate(paths[idx]);
       }}
     >
-      <Tabs.Item title="Seasons" />
-      <Tabs.Item title="Teams" />
+      <Tabs.Item title="Seasons" active={isActive(location, 0)} />
+      <Tabs.Item title="Teams" active={isActive(location, 1)} />
     </Tabs.Group>
   );
+}
+
+function isActive(location: Location, idx: number): boolean {
+  return paths.indexOf(location.pathname) === idx;
 }
