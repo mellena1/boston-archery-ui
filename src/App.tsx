@@ -1,16 +1,18 @@
 import './App.css';
 import { CustomFlowbiteTheme, Flowbite } from 'flowbite-react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Layout } from '@pages/layout';
 import { Home } from '@pages/home';
-import { useEffect, useReducer } from 'react';
-import { AuthContext, AuthReducer, getAuthStateFromLS } from '@state/auth';
+import { useEffect } from 'react';
+import { AuthContext } from '@state/auth';
 import { Login } from '@pages/login';
 import { ProtectedRoute } from '@components/protected-route';
-import { Admin } from '@pages/admin';
+import { AdminLayout } from '@pages/admin';
+import { useAuthToken } from '@hooks/auth';
+import { AdminSeasons } from '@pages/admin/seasons';
 
 function App() {
-  const [authState, authDispatch] = useReducer(AuthReducer, getAuthStateFromLS());
+  const [authState, authDispatch] = useAuthToken();
 
   useEffect(() => {
     document.title = 'Boston AG League';
@@ -57,8 +59,11 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/admin" element={<ProtectedRoute isAllowed={info => info.isAdmin} />} >
-                <Route index element={<Admin />} />
+              <Route path="/admin/*" element={<ProtectedRoute isAllowed={info => info.isAdmin} />} >
+                <Route element={<AdminLayout />}>
+                  <Route index element={<Navigate to="/admin/seasons" replace />} />
+                  <Route path="seasons" element={<AdminSeasons />} />
+                </Route>
               </Route>
             </Route>
             <Route path="*" element={<p>There is nothing here: 404!</p>} />
