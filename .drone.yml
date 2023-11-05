@@ -1,0 +1,25 @@
+kind: pipeline
+type: kubernetes
+name: default
+
+steps:
+- name: install
+  image: node:20
+  commands:
+  - npm install
+
+- name: test
+  image: node:20
+  commands:
+  - npm test
+
+- name: linting
+  image: node:20
+  commands:
+  - npm run lint
+  - npm run format
+
+- name: build
+  image: node:20
+  commands:
+  - npm build
