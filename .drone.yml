@@ -22,4 +22,4 @@ steps:
 - name: build
   image: node:20
   commands:
-  - npm build
+  - npm run build
