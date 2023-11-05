@@ -22,7 +22,9 @@ describe("Login Page", () => {
 
   it("should display signed in with valid token", () => {
     const component = renderer.create(
-      <TestLogin authState={{ isExpired: false } as never} />,
+      <TestLogin
+        authState={{ isExpired: false, userInfo: { isAdmin: false } } as never}
+      />,
     );
     const testInstance = component.root;
 
