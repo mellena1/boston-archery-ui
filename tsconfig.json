@@ -26,7 +26,8 @@
       "@components/*": ["./components/*"],
       "@pages/*": ["./pages/*"],
       "@state/*": ["./state/*"],
-      "@hooks/*": ["./hooks/*"]
+      "@hooks/*": ["./hooks/*"],
+      "@models/*": ["./models/*"]
     }
   },
   "include": ["src"],

@@ -12,9 +12,11 @@ import { useAuthToken } from "@hooks/auth";
 import { AdminSeasons } from "@pages/admin/seasons";
 import { useTitle } from "react-use";
 import { AdminTeams } from "@pages/admin/teams";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 function App() {
   const [authState, authDispatch] = useAuthToken();
+  const queryClient = new QueryClient();
   useTitle("Boston AG League");
 
   useEffect(() => {
@@ -36,6 +38,15 @@ function App() {
         },
       },
     },
+    select: {
+      field: {
+        select: {
+          colors: {
+            gray: "bg-white border-gray-300 focus:border-emerald-900 focus:ring-emerald-900 dark:bg-emerald-900 dark:border-gray-600 dark:text-white dark:focus:border-yellow-300 dark:focus:ring-yellow-300",
+          },
+        },
+      },
+    },
     tab: {
       tablist: {
         tabitem: {
@@ -54,35 +65,39 @@ function App() {
 
   return (
     <Flowbite theme={{ theme: customTheme }}>
-      <AuthContext.Provider
-        value={{
-          authState,
-          setAuth: authDispatch,
-        }}
-      >
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route
-                path="/admin/*"
-                element={<ProtectedRoute isAllowed={(info) => info.isAdmin} />}
-              >
-                <Route element={<AdminLayout />}>
-                  <Route
-                    index
-                    element={<Navigate to="/admin/seasons" replace />}
-                  />
-                  <Route path="seasons" element={<AdminSeasons />} />
-                  <Route path="teams" element={<AdminTeams />} />
+      <QueryClientProvider client={queryClient}>
+        <AuthContext.Provider
+          value={{
+            authState,
+            setAuth: authDispatch,
+          }}
+        >
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route
+                  path="/admin/*"
+                  element={
+                    <ProtectedRoute isAllowed={(info) => info.isAdmin} />
+                  }
+                >
+                  <Route element={<AdminLayout />}>
+                    <Route
+                      index
+                      element={<Navigate to="/admin/seasons" replace />}
+                    />
+                    <Route path="seasons" element={<AdminSeasons />} />
+                    <Route path="teams" element={<AdminTeams />} />
+                  </Route>
                 </Route>
               </Route>
-            </Route>
-            <Route path="*" element={<p>There is nothing here: 404!</p>} />
-          </Routes>
-        </BrowserRouter>
-      </AuthContext.Provider>
+              <Route path="*" element={<p>There is nothing here: 404!</p>} />
+            </Routes>
+          </BrowserRouter>
+        </AuthContext.Provider>
+      </QueryClientProvider>
     </Flowbite>
   );
 }
