@@ -1,4 +1,5 @@
 import { AuthState } from ".";
+
 import { authStateFromJWT } from "./jwt";
 
 export enum AuthActionTypes {

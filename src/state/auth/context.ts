@@ -1,4 +1,5 @@
 import { createContext } from "react";
+
 import { AuthAction, AuthState } from ".";
 
 export const AuthContext = createContext<{

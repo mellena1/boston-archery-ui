@@ -1,13 +1,16 @@
+import { useContext } from "react";
+
 import {
   CustomFlowbiteTheme,
   DarkThemeToggle as FlowbiteDarkThemeToggle,
   Navbar as FlowbiteNavbar,
   NavbarLinkProps,
 } from "flowbite-react";
-import { Login } from "./login";
 import { Link, useLocation } from "react-router-dom";
-import { useContext } from "react";
+
 import { AuthContext, isValid } from "@state/auth";
+
+import { Login } from "./login";
 
 export function Navbar() {
   const customTheme: CustomFlowbiteTheme["navbar"] = {

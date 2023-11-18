@@ -1,11 +1,15 @@
-import { Season } from "@models/season";
-import { SeasonContext } from "@state/season";
-import { Button, Datepicker, Label, TextInput } from "flowbite-react";
 import { useContext, useState } from "react";
-import { HiPlus, HiPlusCircle } from "react-icons/hi";
+
+import { Button, Datepicker, Label, TextInput } from "flowbite-react";
+import { HiPlus } from "react-icons/hi";
+
+import { Season } from "@models/season";
+
+import { SeasonContext } from "@state/season";
+
 import { ByeWeekRow } from "./ByeWeekRow";
 
-export function AdminSeasons() {
+export function AdminSeasonsPage() {
   const { season, setSeason } = useContext(SeasonContext);
 
   const [newSeason, setNewSeason] = useState<Season>({

@@ -1,7 +1,9 @@
-import { Season } from "@models/season";
 import { HTTPResponse } from ".";
-import { ArcheryAPIError } from "./error";
 import { useQuery } from "react-query";
+
+import { Season } from "@models/season";
+
+import { ArcheryAPIError } from "./error";
 
 type GetSeasonsResp = {
   data: Season[];

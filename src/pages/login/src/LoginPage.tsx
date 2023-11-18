@@ -1,8 +1,10 @@
 import { useContext, useEffect } from "react";
+
 import { useNavigate, useSearchParams } from "react-router-dom";
+
 import { AuthActionTypes, AuthContext } from "@state/auth";
 
-export function Login() {
+export function LoginPage() {
   const { setAuth } = useContext(AuthContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();

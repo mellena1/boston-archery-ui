@@ -1,18 +1,24 @@
-import "./App.css";
-import { CustomFlowbiteTheme, Flowbite } from "flowbite-react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { Layout } from "@pages/layout";
-import { Home } from "@pages/home";
 import { useEffect } from "react";
-import { AuthContext } from "@state/auth";
-import { Login } from "@pages/login";
-import { ProtectedRoute } from "@components/protected-route";
-import { AdminLayout } from "@pages/admin";
-import { useAuthToken } from "@hooks/auth";
-import { AdminSeasons } from "@pages/admin/seasons";
-import { useTitle } from "react-use";
-import { AdminTeams } from "@pages/admin/teams";
+
+import { CustomFlowbiteTheme, Flowbite } from "flowbite-react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { useTitle } from "react-use";
+
+import { ProtectedRoute } from "@components/protected-route";
+
+import { useAuthToken } from "@hooks/auth";
+
+import { AdminLayout } from "@pages/admin";
+import { AdminSeasonsPage } from "@pages/admin/seasons";
+import { AdminTeamsPage } from "@pages/admin/teams";
+import { HomePage } from "@pages/home";
+import { Layout } from "@pages/layout";
+import { LoginPage } from "@pages/login";
+
+import { AuthContext } from "@state/auth";
+
+import "./App.css";
 
 function App() {
   const [authState, authDispatch] = useAuthToken();
@@ -75,8 +81,8 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Layout />}>
-                <Route index element={<Home />} />
-                <Route path="/login" element={<Login />} />
+                <Route index element={<HomePage />} />
+                <Route path="/login" element={<LoginPage />} />
                 <Route
                   path="/admin/*"
                   element={
@@ -88,8 +94,8 @@ function App() {
                       index
                       element={<Navigate to="/admin/seasons" replace />}
                     />
-                    <Route path="seasons" element={<AdminSeasons />} />
-                    <Route path="teams" element={<AdminTeams />} />
+                    <Route path="seasons" element={<AdminSeasonsPage />} />
+                    <Route path="teams" element={<AdminTeamsPage />} />
                   </Route>
                 </Route>
               </Route>

@@ -1,7 +1,9 @@
+import { useEffect, useReducer } from "react";
+
+import { useLocalStorage } from "react-use";
+
 import { AuthAction, AuthReducer, AuthState } from "@state/auth";
 import { authStateFromJWT } from "@state/auth/jwt";
-import { useEffect, useReducer } from "react";
-import { useLocalStorage } from "react-use";
 
 const AUTH_TOKEN_LS_KEY = "authToken";
 

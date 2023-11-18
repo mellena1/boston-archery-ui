@@ -1,5 +1,5 @@
-import jwtDecode from "jwt-decode";
 import { AuthState, UserInfo } from ".";
+import jwtDecode from "jwt-decode";
 
 export function authStateFromJWT(jwt?: string): AuthState {
   if (jwt === undefined) {

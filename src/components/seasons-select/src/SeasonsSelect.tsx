@@ -1,7 +1,10 @@
-import { useGetSeasons } from "@hooks/http";
-import { SeasonContext } from "@state/season";
-import { Select } from "flowbite-react";
 import { useContext } from "react";
+
+import { Select } from "flowbite-react";
+
+import { useGetSeasons } from "@hooks/http";
+
+import { SeasonContext } from "@state/season";
 
 export function SeasonsSelect() {
   const { data: seasons, loading, error } = useGetSeasons();

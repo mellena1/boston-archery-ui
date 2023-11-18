@@ -1,8 +1,10 @@
 import renderer from "react-test-renderer";
+
 import { AuthContext, AuthState } from "@state/auth";
-import { Login } from ".";
-import { LoginButton } from "./loginbutton";
-import { SignedIn } from "./signedin";
+
+import { Login } from "./Login";
+import { LoginButton } from "./LoginButton";
+import { SignedIn } from "./SignedIn";
 
 function TestLogin({ authState }: { authState: AuthState }) {
   return (

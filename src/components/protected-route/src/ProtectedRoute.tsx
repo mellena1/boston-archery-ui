@@ -1,6 +1,8 @@
-import { useContext, useEffect, PropsWithChildren } from "react";
-import { AuthContext, AuthState, UserInfo, isValid } from "@state/auth";
+import { PropsWithChildren, useContext, useEffect } from "react";
+
 import { Outlet, useNavigate } from "react-router-dom";
+
+import { AuthContext, AuthState, UserInfo, isValid } from "@state/auth";
 
 type isAllowedFunc = (info: UserInfo) => boolean;
 
