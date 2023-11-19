@@ -17,7 +17,13 @@ type AddSeasonResp = {
   data: Season;
 } & ArcheryAPIError;
 
-export function useAddSeason(): HTTPMutateResponse<AddNewSeasonInput, Season> {
+export interface UseAddSeasonParams {
+  onSuccess?: () => void;
+}
+
+export function useAddSeason({
+  onSuccess,
+}: UseAddSeasonParams = {}): HTTPMutateResponse<AddNewSeasonInput, Season> {
   const [authState] = useAuthToken();
 
   const fetchFunc = async (season: AddNewSeasonInput) => {
@@ -45,12 +51,13 @@ export function useAddSeason(): HTTPMutateResponse<AddNewSeasonInput, Season> {
 
   const { isLoading, data, mutate, error } = useMutation({
     mutationFn: fetchFunc,
+    onSuccess,
   });
 
   return {
     loading: isLoading,
     data,
     mutate,
-    error: error as Error,
+    error: error === null ? undefined : (error as Error),
   };
 }

@@ -12,6 +12,6 @@ export interface HTTPResponse<T> {
 export interface HTTPMutateResponse<InputT, RespT> {
   data?: RespT;
   loading: boolean;
-  error: Error | null;
+  error: Error | undefined;
   mutate: UseMutationResult<RespT, unknown, InputT>["mutate"];
 }

@@ -3,7 +3,9 @@ import { PropsWithChildren } from "react";
 import { Toast } from "flowbite-react";
 import { HiMinusCircle } from "react-icons/hi";
 
-export type ErrorToastProps = PropsWithChildren;
+export type ErrorToastProps = {
+  onDismiss?: () => void;
+} & PropsWithChildren;
 
 export function ErrorToast(props: ErrorToastProps) {
   return (
@@ -12,7 +14,7 @@ export function ErrorToast(props: ErrorToastProps) {
         <HiMinusCircle className="h-5 w-5" />
       </div>
       <div className="pl-4">{props.children}</div>
-      <Toast.Toggle />
+      <Toast.Toggle onDismiss={props.onDismiss} />
     </Toast>
   );
 }

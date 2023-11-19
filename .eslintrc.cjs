@@ -25,7 +25,7 @@ module.exports = {
     ],
     'semi': 2,
     '@typescript-eslint/no-unused-vars': [
-      'warn',
+      'error',
       {
         'argsIgnorePattern': '^_',
         "varsIgnorePattern": "^_",

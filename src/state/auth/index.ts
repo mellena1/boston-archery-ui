@@ -1,6 +1,6 @@
 export * from "./context";
-export * from "./reducer";
 export { authStateFromJWT } from "./jwt";
+export * from "./reducer";
 
 export interface UserInfo {
   isAdmin: boolean;

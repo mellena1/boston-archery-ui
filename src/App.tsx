@@ -9,9 +9,7 @@ import { ProtectedRoute } from "@components/protected-route";
 
 import { useAuthToken } from "@hooks/auth";
 
-import { AdminLayout } from "@pages/admin";
-import { AdminSeasonsPage } from "@pages/admin/seasons";
-import { AdminTeamsPage } from "@pages/admin/teams";
+import { AdminLayout, AdminSeasonsPage, AdminTeamsPage } from "@pages/admin";
 import { HomePage } from "@pages/home";
 import { Layout } from "@pages/layout";
 import { LoginPage } from "@pages/login";
@@ -36,11 +34,79 @@ function App() {
           "bg-yellow-300 text-black enabled:hover:bg-yellow-100 focus:ring-4 focus:ring-yellow-300",
       },
     },
+    datepicker: {
+      popup: {
+        root: {
+          inner:
+            "inline-block rounded-lg bg-white p-4 shadow-lg dark:bg-emerald-900",
+        },
+        header: {
+          selectors: {
+            button: {
+              base: "text-sm rounded-lg text-gray-900 dark:text-white bg-white dark:text-gray-900 dark:bg-yellow-300 font-semibold py-2.5 px-5 hover:bg-gray-100 dark:hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-gray-200 view-switch",
+            },
+          },
+        },
+        footer: {
+          button: {
+            today:
+              "bg-emerald-900 text-white hover:bg-emerald-700 dark:text-gray-900 dark:bg-yellow-300 dark:hover:bg-yellow-500",
+          },
+        },
+      },
+      views: {
+        days: {
+          items: {
+            item: {
+              base: "block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:text-white hover:bg-emerald-700 dark:text-white dark:hover:bg-yellow-500",
+              selected:
+                "bg-emerald-900 text-white hover:bg-emerald-700 dark:bg-yellow-300 dark:text-gray-900 dark:hover:bg-yellow-500",
+            },
+          },
+        },
+        months: {
+          items: {
+            item: {
+              base: "block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:text-white hover:bg-emerald-700 dark:text-white dark:hover:bg-yellow-500",
+              selected:
+                "bg-emerald-900 text-white hover:bg-emerald-700 dark:bg-yellow-300 dark:text-gray-900 dark:hover:bg-yellow-500",
+            },
+          },
+        },
+        years: {
+          items: {
+            item: {
+              base: "block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:text-white hover:bg-emerald-700 dark:text-white dark:hover:bg-yellow-500",
+              selected:
+                "bg-emerald-900 text-white hover:bg-emerald-700 dark:bg-yellow-300 dark:text-gray-900 dark:hover:bg-yellow-500",
+            },
+          },
+        },
+        decades: {
+          items: {
+            item: {
+              base: "block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:text-white hover:bg-emerald-700 dark:text-white dark:hover:bg-yellow-500",
+              selected:
+                "bg-emerald-900 text-white hover:bg-emerald-700 dark:bg-yellow-300 dark:text-gray-900 dark:hover:bg-yellow-500",
+            },
+          },
+        },
+      },
+    },
     dropdown: {
       floating: {
         divider: "my-1 h-px bg-zinc-300 dark:bg-gray-600",
         style: {
           auto: "bg-zinc-100 dark:bg-zinc-800 dark:text-white",
+        },
+      },
+    },
+    textInput: {
+      field: {
+        input: {
+          colors: {
+            gray: "border-emerald-900 focus:border-emerald-900 focus:ring-emerald-900 dark:bg-emerald-900 dark:focus:border-yellow-300 dark:focus:ring-yellow-300",
+          },
         },
       },
     },

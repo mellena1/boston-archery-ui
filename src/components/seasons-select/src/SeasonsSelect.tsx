@@ -7,10 +7,10 @@ import { useGetSeasons } from "@hooks/http";
 import { SeasonContext } from "@state/season";
 
 export interface SeasonsSelectProps {
-  showAddSeason: boolean;
+  showAddSeason?: boolean;
 }
 
-export function SeasonsSelect(props: SeasonsSelectProps) {
+export function SeasonsSelect({ showAddSeason = false }: SeasonsSelectProps) {
   const { data: seasons, loading, error } = useGetSeasons();
   const { season, setSeason } = useContext(SeasonContext);
 
@@ -25,15 +25,19 @@ export function SeasonsSelect(props: SeasonsSelectProps) {
     <Select
       onChange={(e) => {
         const idx = e.target.selectedIndex;
-        if (props.showAddSeason) {
+        console.log(idx);
+        if (showAddSeason) {
           if (idx === 0) {
             setSeason(undefined);
             return;
           }
+
+          setSeason(sortedSeasons[idx - 2]);
+          return;
         }
-        setSeason(sortedSeasons[idx - 1]);
+        setSeason(sortedSeasons[idx]);
       }}
-      disabled={loadingOrError || noOptions}
+      disabled={loadingOrError || (noOptions && !showAddSeason)}
       value={loadingOrError || noOptions ? "disabled" : season?.id}
     >
       {loadingOrError && (
@@ -41,14 +45,19 @@ export function SeasonsSelect(props: SeasonsSelectProps) {
           Seasons Loading...
         </option>
       )}
-      {noOptions && !props.showAddSeason && (
+      {noOptions && !showAddSeason && (
         <option value="disabled" disabled>
           No Seasons Exist
         </option>
       )}
-      {!loadingOrError && !noOptions && (
+      {!loadingOrError && (
         <>
-          <option value="add">Add a new season</option>
+          {showAddSeason && (
+            <>
+              <option>Add a new season</option>
+              <option disabled>{"-".repeat(40)}</option>
+            </>
+          )}
           {sortedSeasons.map((season) => {
             return (
               <option key={season.id} value={season.id}>
