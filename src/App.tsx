@@ -30,6 +30,7 @@ function App() {
   const customTheme: CustomFlowbiteTheme = {
     button: {
       color: {
+        info: "bg-emerald-900 text-white enabled:hover:bg-emerald-700 focus:ring-4 focus:ring-emerald-700 dark:bg-yellow-300 dark:text-black dark:enabled:hover:bg-yellow-100 dark:focus:ring-4 dark:focus:ring-yellow-300",
         yellow:
           "bg-yellow-300 text-black enabled:hover:bg-yellow-100 focus:ring-4 focus:ring-yellow-300",
       },
