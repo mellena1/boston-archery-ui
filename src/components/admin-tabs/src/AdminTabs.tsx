@@ -8,16 +8,16 @@ export function AdminTabs() {
   const location = useLocation();
 
   return (
-    <Tabs.Group
+    <Tabs
       aria-label="Admin tabs"
       style="underline"
-      onActiveTabChange={(idx) => {
+      onActiveTabChange={(idx: number) => {
         navigate(paths[idx]);
       }}
     >
       <Tabs.Item title="Seasons" active={isActive(location, 0)} />
       <Tabs.Item title="Teams" active={isActive(location, 1)} />
-    </Tabs.Group>
+    </Tabs>
   );
 }
 

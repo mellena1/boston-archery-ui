@@ -6,7 +6,11 @@ import { useGetSeasons } from "@hooks/http";
 
 import { SeasonContext } from "@state/season";
 
-export function SeasonsSelect() {
+export interface SeasonsSelectProps {
+  showAddSeason: boolean;
+}
+
+export function SeasonsSelect(props: SeasonsSelectProps) {
   const { data: seasons, loading, error } = useGetSeasons();
   const { season, setSeason } = useContext(SeasonContext);
 
@@ -20,7 +24,14 @@ export function SeasonsSelect() {
   return (
     <Select
       onChange={(e) => {
-        setSeason(sortedSeasons[e.target.selectedIndex]);
+        const idx = e.target.selectedIndex;
+        if (props.showAddSeason) {
+          if (idx === 0) {
+            setSeason(undefined);
+            return;
+          }
+        }
+        setSeason(sortedSeasons[idx - 1]);
       }}
       disabled={loadingOrError || noOptions}
       value={loadingOrError || noOptions ? "disabled" : season?.id}
@@ -30,20 +41,23 @@ export function SeasonsSelect() {
           Seasons Loading...
         </option>
       )}
-      {noOptions && (
+      {noOptions && !props.showAddSeason && (
         <option value="disabled" disabled>
           No Seasons Exist
         </option>
       )}
-      {!loadingOrError &&
-        !noOptions &&
-        sortedSeasons.map((season) => {
-          return (
-            <option key={season.id} value={season.id}>
-              {season.name}
-            </option>
-          );
-        })}
+      {!loadingOrError && !noOptions && (
+        <>
+          <option value="add">Add a new season</option>
+          {sortedSeasons.map((season) => {
+            return (
+              <option key={season.id} value={season.id}>
+                {season.name}
+              </option>
+            );
+          })}
+        </>
+      )}
     </Select>
   );
 }

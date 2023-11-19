@@ -1,3 +1,3 @@
 export interface ArcheryAPIError {
-  msg: string;
+  Msg: string;
 }

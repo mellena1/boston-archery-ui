@@ -1,9 +1,9 @@
-import { HTTPResponse } from ".";
 import { useQuery } from "react-query";
 
-import { Season } from "@models/season";
+import { HTTPResponse } from "@hooks/http";
+import { ArcheryAPIError } from "@hooks/http/error";
 
-import { ArcheryAPIError } from "./error";
+import { Season } from "@models/season";
 
 type GetSeasonsResp = {
   data: Season[];
@@ -14,7 +14,7 @@ export function useGetSeasons(): HTTPResponse<Season[]> {
     const resp = await fetch("http://localhost:3000/api/v1/seasons");
     const respParsed = (await resp.json()) as GetSeasonsResp;
     if (!resp.ok) {
-      throw new Error(`${resp.status} status code: ` + respParsed.msg);
+      throw Error(`${resp.status} status code: ${respParsed.Msg}`);
     }
     return respParsed.data;
   };

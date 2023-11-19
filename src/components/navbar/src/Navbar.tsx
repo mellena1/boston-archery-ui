@@ -22,7 +22,7 @@ export function Navbar() {
   const { authState } = useContext(AuthContext);
 
   return (
-    <FlowbiteNavbar theme={customTheme.root} fluid>
+    <FlowbiteNavbar theme={customTheme} fluid>
       <FlowbiteNavbar.Brand>
         <span className="self-center whitespace-nowrap text-xl font-semibold text-white">
           Boston AG League
