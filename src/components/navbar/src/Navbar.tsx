@@ -8,7 +8,7 @@ import {
 } from "flowbite-react";
 import { Link, useLocation } from "react-router-dom";
 
-import { AuthContext, isValid } from "@state/auth";
+import { AuthContext, isAdmin } from "@state/auth";
 
 import { Login } from "./login";
 
@@ -37,7 +37,7 @@ export function Navbar() {
         <NavbarLink as={Link} to={"/"} active={location.pathname === "/"}>
           Home
         </NavbarLink>
-        {isValid(authState) ? (
+        {isAdmin(authState) ? (
           <NavbarLink
             as={Link}
             to={"/admin"}

@@ -213,7 +213,7 @@ export function AdminSeasonsPage() {
                     setNewSeason({
                       ...newSeason,
                       byeWeeks: newSeason.byeWeeks?.map((v, idx) =>
-                        idx === i ? d.toDateString() : v,
+                        idx === i ? d.toISOString().substring(0, 10) : v,
                       ),
                     });
                   }}
