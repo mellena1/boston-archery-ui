@@ -1,6 +1,7 @@
 import { UseMutationResult, UseQueryResult } from "react-query";
 
 export * from "./seasons";
+export * from "./teams";
 
 export interface HTTPResponse<T> {
   data?: T;

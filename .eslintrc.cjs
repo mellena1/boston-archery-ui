@@ -34,6 +34,7 @@ module.exports = {
     ],
     '@typescript-eslint/no-empty-function': 'off',
     "react/no-unescaped-entities": ["error", {"forbid": [">", "}"]}],
+    "@typescript-eslint/no-misused-promises": ["error", { "checksVoidReturn": { "attributes": false } }],
   },
   settings: {
     "react": {

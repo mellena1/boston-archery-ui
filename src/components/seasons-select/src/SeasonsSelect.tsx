@@ -25,7 +25,6 @@ export function SeasonsSelect({ showAddSeason = false }: SeasonsSelectProps) {
     <Select
       onChange={(e) => {
         const idx = e.target.selectedIndex;
-        console.log(idx);
         if (showAddSeason) {
           if (idx === 0) {
             setSeason(undefined);
