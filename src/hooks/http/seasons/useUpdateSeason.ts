@@ -29,7 +29,7 @@ export function useUpdateSeason({
 
   const fetchFunc = async (season: UpdateSeasonInput) => {
     const resp = await fetch(
-      `http://localhost:3000/api/v1/seasons/${season.id}`,
+      `http://localhost:3000/api/v1/season/${season.id}`,
       {
         method: "PUT",
         body: JSON.stringify({

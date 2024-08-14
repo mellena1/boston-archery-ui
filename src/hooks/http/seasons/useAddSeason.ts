@@ -27,7 +27,7 @@ export function useAddSeason({
   const [authState] = useAuthToken();
 
   const fetchFunc = async (season: AddNewSeasonInput) => {
-    const resp = await fetch("http://localhost:3000/api/v1/seasons", {
+    const resp = await fetch("http://localhost:3000/api/v1/season", {
       method: "POST",
       body: JSON.stringify({
         name: season.name,
