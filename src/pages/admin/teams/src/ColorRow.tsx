@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { Button } from "flowbite-react";
 import { HexColorPicker } from "react-colorful";
 import { HiTrash } from "react-icons/hi";
