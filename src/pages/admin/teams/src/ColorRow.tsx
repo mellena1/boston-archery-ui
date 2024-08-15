@@ -6,14 +6,28 @@ import { HiTrash } from "react-icons/hi";
 
 export interface ColorRowProps {
   onDelete: () => void;
+  color: string;
+  setColor: (color: string) => void;
+  colorPickerHidden: boolean;
+  onClick: () => void;
 }
 
-export function ColorRow({ onDelete }: ColorRowProps) {
-  const [color, setColor] = useState<string>("#FF0000");
+export function ColorRow({
+  color,
+  setColor,
+  onDelete,
+  colorPickerHidden,
+  onClick,
+}: ColorRowProps) {
   return (
     <div className="flex">
       <div>
-        <ColorInput color={color} setColor={setColor} />
+        <ColorInput
+          color={color}
+          setColor={setColor}
+          hidden={colorPickerHidden}
+          onClick={onClick}
+        />
       </div>
       <div className="pl-2">
         <Button onClick={onDelete} className="p-1">
@@ -27,11 +41,11 @@ export function ColorRow({ onDelete }: ColorRowProps) {
 interface ColorInputProps {
   color: string;
   setColor: React.Dispatch<string>;
+  hidden: boolean;
+  onClick: () => void;
 }
 
-function ColorInput({ color, setColor }: ColorInputProps) {
-  const [hidden, setHidden] = useState(true);
-
+function ColorInput({ color, setColor, hidden, onClick }: ColorInputProps) {
   return (
     <>
       <div
@@ -39,17 +53,17 @@ function ColorInput({ color, setColor }: ColorInputProps) {
         style={{
           backgroundColor: color,
         }}
-        onClick={() => {
-          setHidden(!hidden);
-        }}
+        onClick={onClick}
       />
       {!hidden && (
-        <HexColorPicker
-          color={color}
-          onChange={(newColor) => {
-            setColor(newColor);
-          }}
-        />
+        <div className="z-10 absolute">
+          <HexColorPicker
+            color={color}
+            onChange={(newColor) => {
+              setColor(newColor);
+            }}
+          />
+        </div>
       )}
     </>
   );

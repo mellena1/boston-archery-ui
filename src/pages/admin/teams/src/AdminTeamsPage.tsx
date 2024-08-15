@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Button, Label, TextInput } from "flowbite-react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { HiPlus } from "react-icons/hi";
 import { useTitle } from "react-use";
 
@@ -14,12 +14,25 @@ import { ColorRow } from "./ColorRow";
 
 interface FormInput {
   name: string;
+  teamColors: { val: string; id: string }[];
 }
 
 export function AdminTeamsPage() {
   useTitle("Admin - Teams");
 
-  const { register, handleSubmit } = useForm<FormInput>();
+  const { register, handleSubmit, control } = useForm<FormInput>();
+  const {
+    append,
+    update,
+    remove,
+    fields: teamColors,
+  } = useFieldArray({ name: "teamColors", control });
+
+  const [selectedColorIdx, setSelectedColorIdx] = useState<number | undefined>(
+    undefined,
+  );
+
+  console.log(selectedColorIdx);
 
   const [selectedTeam, setSelectedTeam] = useState<Team | undefined>(undefined);
   const isNewTeam = selectedTeam === undefined;
@@ -63,13 +76,40 @@ export function AdminTeamsPage() {
         <div className="pt-4">
           <div className="flex">
             <Label value="Team Colors" />
-            <Button size="xs" className="ml-2" onClick={() => {}}>
+            <Button
+              size="xs"
+              className="ml-2"
+              onClick={() => {
+                append({ val: "#FF0000", id: `${teamColors.length}` });
+              }}
+            >
               <HiPlus />
             </Button>
           </div>
         </div>
         <div className="grid gap-2 pt-2">
-          <ColorRow onDelete={() => {}} />
+          {teamColors.map((color, i) => {
+            return (
+              <ColorRow
+                key={`color-${color.id}`}
+                color={color.val}
+                setColor={(newColor) => {
+                  update(i, { val: newColor, id: `${i}` });
+                }}
+                onDelete={() => {
+                  remove(i);
+                }}
+                colorPickerHidden={selectedColorIdx !== i}
+                onClick={() => {
+                  if (selectedColorIdx === i) {
+                    setSelectedColorIdx(undefined);
+                  } else {
+                    setSelectedColorIdx(i);
+                  }
+                }}
+              />
+            );
+          })}
         </div>
         <div className="pt-8 grid justify-items-center">
           <Button type="submit" disabled={loading}>
