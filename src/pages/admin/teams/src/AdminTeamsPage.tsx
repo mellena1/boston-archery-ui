@@ -14,7 +14,7 @@ import { ColorRow } from "./ColorRow";
 
 interface FormInput {
   name: string;
-  teamColors: { val: string; id?: string }[];
+  teamColors: { val: string }[];
 }
 
 export function AdminTeamsPage() {
@@ -78,7 +78,7 @@ export function AdminTeamsPage() {
               size="xs"
               className="ml-2"
               onClick={() => {
-                append({ val: "#FF0000" });
+                append({ val: "#ff0000" });
               }}
             >
               <HiPlus />
@@ -123,7 +123,7 @@ export function AdminTeamsPage() {
 }
 
 const onSubmit: SubmitHandler<FormInput> = (input) => {
-  console.log(input.name);
+  console.log(input);
   return;
 };
 
