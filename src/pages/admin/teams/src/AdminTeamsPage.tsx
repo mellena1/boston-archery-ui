@@ -14,7 +14,7 @@ import { ColorRow } from "./ColorRow";
 
 interface FormInput {
   name: string;
-  teamColors: { val: string; id: string }[];
+  teamColors: { val: string; id?: string }[];
 }
 
 export function AdminTeamsPage() {
@@ -31,8 +31,6 @@ export function AdminTeamsPage() {
   const [selectedColorIdx, setSelectedColorIdx] = useState<number | undefined>(
     undefined,
   );
-
-  console.log(selectedColorIdx);
 
   const [selectedTeam, setSelectedTeam] = useState<Team | undefined>(undefined);
   const isNewTeam = selectedTeam === undefined;
@@ -80,7 +78,7 @@ export function AdminTeamsPage() {
               size="xs"
               className="ml-2"
               onClick={() => {
-                append({ val: "#FF0000", id: `${teamColors.length}` });
+                append({ val: "#FF0000" });
               }}
             >
               <HiPlus />
@@ -88,28 +86,31 @@ export function AdminTeamsPage() {
           </div>
         </div>
         <div className="grid gap-2 pt-2">
-          {teamColors.map((color, i) => {
-            return (
-              <ColorRow
-                key={`color-${color.id}`}
-                color={color.val}
-                setColor={(newColor) => {
-                  update(i, { val: newColor, id: `${i}` });
-                }}
-                onDelete={() => {
-                  remove(i);
-                }}
-                colorPickerHidden={selectedColorIdx !== i}
-                onClick={() => {
-                  if (selectedColorIdx === i) {
-                    setSelectedColorIdx(undefined);
-                  } else {
-                    setSelectedColorIdx(i);
-                  }
-                }}
-              />
-            );
-          })}
+          {teamColors.map((color, i) => (
+            <ColorRow
+              key={`color-${i}`}
+              color={color.val}
+              setColor={(newColor) => {
+                update(i, { val: cleanHexCode(newColor) });
+              }}
+              onDelete={() => {
+                remove(i);
+              }}
+              colorPickerHidden={selectedColorIdx !== i}
+              onClick={() => {
+                if (selectedColorIdx === i) {
+                  setSelectedColorIdx(undefined);
+                } else {
+                  setSelectedColorIdx(i);
+                }
+              }}
+              onClickAway={() => {
+                if (selectedColorIdx === i) {
+                  setSelectedColorIdx(undefined);
+                }
+              }}
+            />
+          ))}
         </div>
         <div className="pt-8 grid justify-items-center">
           <Button type="submit" disabled={loading}>
@@ -125,3 +126,14 @@ const onSubmit: SubmitHandler<FormInput> = (input) => {
   console.log(input.name);
   return;
 };
+
+function cleanHexCode(s: string): string {
+  let hex = s.replace("#", "").toLowerCase();
+  if (hex.length === 3) {
+    hex = hex
+      .split("")
+      .map((l) => l + l)
+      .join("");
+  }
+  return `#${hex}`;
+}
