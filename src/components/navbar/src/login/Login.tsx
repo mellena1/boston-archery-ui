@@ -1,9 +1,8 @@
 import { useContext } from "react";
 
-import { AuthContext, isValid } from "@state/auth";
-
 import { LoginButton } from "./LoginButton";
 import { SignedIn } from "./SignedIn";
+import { AuthContext, isValid } from "@/state/auth";
 
 export function Login() {
   const { authState } = useContext(AuthContext);

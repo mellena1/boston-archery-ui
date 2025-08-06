@@ -1,6 +1,7 @@
 import { createContext } from "react";
 
-import { AuthAction, AuthState } from ".";
+import { type AuthAction } from "./reducer";
+import { type AuthState } from "./state";
 
 export const AuthContext = createContext<{
   authState: AuthState;

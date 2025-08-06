@@ -2,9 +2,8 @@ import { useContext } from "react";
 
 import { Select } from "flowbite-react";
 
-import { useGetSeasons } from "@hooks/http";
-
-import { SeasonContext } from "@state/season";
+import { useGetSeasons } from "@/hooks/http";
+import { SeasonContext } from "@/state/season";
 
 export interface SeasonsSelectProps {
   showAddSeason?: boolean;

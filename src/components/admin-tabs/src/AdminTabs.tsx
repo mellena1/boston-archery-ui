@@ -1,5 +1,5 @@
 import { Tabs } from "flowbite-react";
-import { Location, useLocation, useNavigate } from "react-router-dom";
+import { type Location, useLocation, useNavigate } from "react-router-dom";
 
 const paths = ["/admin/seasons", "/admin/teams"];
 

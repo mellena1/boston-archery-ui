@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import { Season } from "@models/season";
+import { type Season } from "@/models/season";
 
 export const SeasonContext = createContext<{
   season: Season | undefined;

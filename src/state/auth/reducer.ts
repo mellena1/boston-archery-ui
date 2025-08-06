@@ -1,4 +1,4 @@
-import { AuthState } from ".";
+import { type AuthState } from ".";
 
 import { authStateFromJWT } from "./jwt";
 

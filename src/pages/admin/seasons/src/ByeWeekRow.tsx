@@ -1,4 +1,4 @@
-import { Button, Datepicker, DatepickerProps } from "flowbite-react";
+import { Button, Datepicker, type DatepickerProps } from "flowbite-react";
 import { HiTrash } from "react-icons/hi";
 
 export type ByeWeekRowProps = {

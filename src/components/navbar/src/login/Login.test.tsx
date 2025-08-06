@@ -1,10 +1,7 @@
-import renderer from "react-test-renderer";
-
-import { AuthContext, AuthState } from "@state/auth";
+import { render, screen } from "@testing-library/react";
 
 import { Login } from "./Login";
-import { LoginButton } from "./LoginButton";
-import { SignedIn } from "./SignedIn";
+import { AuthContext, type AuthState } from "@/state/auth";
 
 function TestLogin({ authState }: { authState: AuthState }) {
   return (
@@ -16,29 +13,24 @@ function TestLogin({ authState }: { authState: AuthState }) {
 
 describe("Login Page", () => {
   it("should display login button with undefined token", () => {
-    const component = renderer.create(<TestLogin authState={undefined} />);
-    const testInstance = component.root;
+    render(<TestLogin authState={undefined} />);
 
-    expect(testInstance.findByType(LoginButton)).toBeDefined();
+    expect(screen.getByText("Login")).toBeDefined();
   });
 
   it("should display signed in with valid token", () => {
-    const component = renderer.create(
+    render(
       <TestLogin
         authState={{ isExpired: false, userInfo: { isAdmin: false } } as never}
       />,
     );
-    const testInstance = component.root;
 
-    expect(testInstance.findByType(SignedIn)).toBeDefined();
+    expect(screen.getByAltText("User settings")).toBeDefined();
   });
 
   it("should display login button with expired token", () => {
-    const component = renderer.create(
-      <TestLogin authState={{ isExpired: true } as never} />,
-    );
-    const testInstance = component.root;
+    render(<TestLogin authState={{ isExpired: true } as never} />);
 
-    expect(testInstance.findByType(LoginButton)).toBeDefined();
+    expect(screen.getByText("Login")).toBeDefined();
   });
 });

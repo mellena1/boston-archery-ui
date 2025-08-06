@@ -1,4 +1,4 @@
-import { UseMutationResult, UseQueryResult } from "react-query";
+import { type UseMutationResult, type UseQueryResult } from "react-query";
 
 export * from "./seasons";
 export * from "./teams";

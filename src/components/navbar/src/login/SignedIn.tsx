@@ -1,13 +1,13 @@
 import { useContext } from "react";
 
 import {
-  AvatarProps,
-  CustomFlowbiteTheme,
+  type AvatarProps,
+  type CustomFlowbiteTheme,
   Dropdown,
   Avatar as FlowbiteAvatar,
 } from "flowbite-react";
 
-import { AuthActionTypes, AuthContext, AuthState } from "@state/auth";
+import { AuthActionTypes, AuthContext, type AuthState } from "@/state/auth";
 
 const DISCORD_CDN = "https://cdn.discordapp.com";
 const AVATAR_SIZE = 64;

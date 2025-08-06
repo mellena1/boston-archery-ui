@@ -1,22 +1,18 @@
 import { useEffect } from "react";
 
-import { CustomFlowbiteTheme, Flowbite } from "flowbite-react";
+import { type CustomFlowbiteTheme, Flowbite } from "flowbite-react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { useTitle } from "react-use";
 
-import { ProtectedRoute } from "@components/protected-route";
-
-import { useAuthToken } from "@hooks/auth";
-
-import { AdminLayout, AdminSeasonsPage, AdminTeamsPage } from "@pages/admin";
-import { HomePage } from "@pages/home";
-import { Layout } from "@pages/layout";
-import { LoginPage } from "@pages/login";
-
-import { AuthContext } from "@state/auth";
-
 import "./App.css";
+import { ProtectedRoute } from "@/components/protected-route";
+import { useAuthToken } from "@/hooks/auth";
+import { AdminLayout, AdminSeasonsPage, AdminTeamsPage } from "@/pages/admin";
+import { HomePage } from "@/pages/home";
+import { Layout } from "@/pages/layout";
+import { LoginPage } from "@/pages/login";
+import { AuthContext } from "@/state/auth";
 
 function App() {
   const [authState, authDispatch] = useAuthToken();

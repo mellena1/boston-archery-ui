@@ -1,9 +1,8 @@
-import { ArcheryAPIError } from "../error";
+import { type ArcheryAPIError } from "../error";
 import { useQuery } from "react-query";
 
-import { HTTPResponse } from "@hooks/http";
-
-import { Team } from "@models/team";
+import { type HTTPResponse } from "@/hooks/http";
+import { type Team } from "@/models/team";
 
 type GetTeamsResp = {
   data: Team[];

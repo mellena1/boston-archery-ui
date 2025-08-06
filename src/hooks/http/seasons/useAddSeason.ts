@@ -1,10 +1,9 @@
-import { HTTPMutateResponse } from "..";
+import { type HTTPMutateResponse } from "..";
 import { useMutation } from "react-query";
 
-import { useAuthToken } from "@hooks/auth";
-import { ArcheryAPIError } from "@hooks/http/error";
-
-import { Season } from "@models/season";
+import { useAuthToken } from "@/hooks/auth";
+import { type ArcheryAPIError } from "@/hooks/http/error";
+import { type Season } from "@/models/season";
 
 export interface AddNewSeasonInput {
   name: string;

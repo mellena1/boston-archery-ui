@@ -1,16 +1,14 @@
 import { useState } from "react";
 
 import { Button, Label, TextInput } from "flowbite-react";
-import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { type SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { HiPlus } from "react-icons/hi";
 import { useTitle } from "react-use";
 
-import { RequiredLabel } from "@components/form";
-import { TeamsSelect } from "@components/teams-select";
-
-import { Team } from "@models/team";
-
 import { ColorRow } from "./ColorRow";
+import { RequiredLabel } from "@/components/form";
+import { TeamsSelect } from "@/components/teams-select";
+import { type Team } from "@/models/team";
 
 interface FormInput {
   name: string;
@@ -48,7 +46,7 @@ export function AdminTeamsPage() {
           />
         </div>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={(e) => void handleSubmit(onSubmit)(e)}>
         <div className="grid grid-cols-2 gap-4">
           <div className="col-span-1">
             <RequiredLabel

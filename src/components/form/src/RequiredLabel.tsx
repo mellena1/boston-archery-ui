@@ -1,4 +1,4 @@
-import { Label, LabelProps } from "flowbite-react";
+import { Label, type LabelProps } from "flowbite-react";
 
 export function RequiredLabel(props: LabelProps) {
   return (

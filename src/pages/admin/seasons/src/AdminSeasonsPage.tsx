@@ -4,17 +4,13 @@ import { Button, Datepicker, Label, TextInput } from "flowbite-react";
 import { HiPlus } from "react-icons/hi";
 import { useTitle } from "react-use";
 
-import { RequiredLabel } from "@components/form";
-import { ErrorToast } from "@components/popups";
-import { SeasonsSelect } from "@components/seasons-select";
-
-import { useAddSeason, useGetSeasons, useUpdateSeason } from "@hooks/http";
-
-import { Season } from "@models/season";
-
-import { SeasonContext } from "@state/season";
-
 import { ByeWeekRow } from "./ByeWeekRow";
+import { RequiredLabel } from "@/components/form";
+import { ErrorToast } from "@/components/popups";
+import { SeasonsSelect } from "@/components/seasons-select";
+import { useAddSeason, useGetSeasons, useUpdateSeason } from "@/hooks/http";
+import { type Season } from "@/models/season";
+import { SeasonContext } from "@/state/season";
 
 const emptySeason = {
   id: "",

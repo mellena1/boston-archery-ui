@@ -1,8 +1,13 @@
-import { PropsWithChildren, useContext, useEffect } from "react";
+import { type PropsWithChildren, useContext, useEffect } from "react";
 
 import { Outlet, useNavigate } from "react-router-dom";
 
-import { AuthContext, AuthState, UserInfo, isValid } from "@state/auth";
+import {
+  AuthContext,
+  type AuthState,
+  type UserInfo,
+  isValid,
+} from "@/state/auth";
 
 type isAllowedFunc = (info: UserInfo) => boolean;
 
@@ -30,7 +35,7 @@ export function ProtectedRoute({
     return null;
   }
 
-  return children ? children : <Outlet />;
+  return children ?? <Outlet />;
 }
 
 function shouldRedirect(

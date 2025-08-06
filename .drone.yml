@@ -4,22 +4,22 @@ name: default
 
 steps:
 - name: install
-  image: node:20
+  image: oven/bun:1
   commands:
-  - npm install
+  - bun install
 
 - name: test
-  image: node:20
+  image: oven/bun:1
   commands:
-  - npm test
+  - bun test
 
 - name: linting
-  image: node:20
+  image: oven/bun:1
   commands:
-  - npm run lint
-  - npm run format
+  - bun lint
+  - bun format
 
 - name: build
-  image: node:20
+  image: oven/bun:1
   commands:
-  - npm run build
+  - bun build

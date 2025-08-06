@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import { AuthActionTypes, AuthContext } from "@state/auth";
+import { AuthActionTypes, AuthContext } from "@/state/auth";
 
 export function LoginPage() {
   const { setAuth } = useContext(AuthContext);
@@ -16,7 +16,7 @@ export function LoginPage() {
       setAuth({ type: AuthActionTypes.UPDATE, jwt: token });
       navigate("/");
     }
-  });
+  }, [navigate, setSearchParams, setAuth, token]);
 
   return null;
 }

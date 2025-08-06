@@ -2,9 +2,8 @@ import React from "react";
 
 import { Select } from "flowbite-react";
 
-import { useGetTeams } from "@hooks/http";
-
-import { Team } from "@models/team";
+import { useGetTeams } from "@/hooks/http";
+import { type Team } from "@/models/team";
 
 export interface TeamsSelectProps {
   showAddTeam?: boolean;

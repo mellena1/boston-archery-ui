@@ -1,5 +1,6 @@
-import { AuthState, UserInfo } from ".";
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
+
+import { type AuthState, type UserInfo } from "./state";
 
 export function authStateFromJWT(jwt?: string): AuthState {
   if (jwt === undefined) {
@@ -9,7 +10,8 @@ export function authStateFromJWT(jwt?: string): AuthState {
   try {
     const userInfo = parseJWT(jwt);
     return { jwt, userInfo: userInfo, isExpired: checkIfExpired(userInfo) };
-  } catch (Exception) {
+  } catch (e) {
+    console.error("failed to parse jwt", e);
     return undefined;
   }
 }
