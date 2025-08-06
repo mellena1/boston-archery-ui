@@ -22,4 +22,4 @@ steps:
 - name: build
   image: oven/bun:1
   commands:
-  - bun build
+  - bun run build

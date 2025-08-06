@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 
 import { Toast } from "flowbite-react";
 import { HiMinusCircle } from "react-icons/hi";
