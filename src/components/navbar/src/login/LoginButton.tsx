@@ -1,9 +1,9 @@
-import { Button } from "flowbite-react";
+import { Button } from "@/components/ui/button";
 
 export function LoginButton() {
   return (
-    <Button href="http://localhost:3000/api/v1/auth/login" color="yellow">
-      Login
-    </Button>
+    <a href="http://localhost:3000/api/v1/auth/login">
+      <Button>Login</Button>
+    </a>
   );
 }

@@ -1,14 +1,23 @@
+import { format } from "date-fns";
 import { useContext, useEffect, useState } from "react";
-
-import { Button, Datepicker, Label, TextInput } from "flowbite-react";
-import { HiPlus } from "react-icons/hi";
+import { HiCalendar as CalendarIcon, HiPlus } from "react-icons/hi";
 import { useTitle } from "react-use";
 
 import { ByeWeekRow } from "./ByeWeekRow";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { RequiredLabel } from "@/components/form";
 import { ErrorToast } from "@/components/popups";
 import { SeasonsSelect } from "@/components/seasons-select";
 import { useAddSeason, useGetSeasons, useUpdateSeason } from "@/hooks/http";
+import { cn } from "@/lib/utils";
 import { type Season } from "@/models/season";
 import { SeasonContext } from "@/state/season";
 
@@ -122,10 +131,11 @@ export function AdminSeasonsPage() {
           <div className="col-span-1">
             <RequiredLabel
               htmlFor="name"
-              value="Name"
-              color={error && newSeason.name === "" ? "failure" : undefined}
-            />
-            <TextInput
+              className={error && newSeason.name === "" ? "text-red-500" : ""}
+            >
+              Name
+            </RequiredLabel>
+            <Input
               id="name"
               type="text"
               value={newSeason.name}
@@ -135,60 +145,100 @@ export function AdminSeasonsPage() {
                   name: v.currentTarget.value,
                 });
               }}
-              color={error && newSeason.name === "" ? "failure" : undefined}
+              className={error && newSeason.name === "" ? "border-red-500" : ""}
             />
           </div>
 
           <div className="row-start-2">
             <RequiredLabel
               htmlFor="startDate"
-              value="Start Date"
-              color={
-                error && newSeason.startDate === "" ? "failure" : undefined
+              className={
+                error && newSeason.startDate === "" ? "text-red-500" : ""
               }
-            />
-            <Datepicker
-              id="startDate"
-              value={newSeason.startDate}
-              color={
-                error && newSeason.startDate === "" ? "failure" : undefined
-              }
-              onSelectedDateChanged={(d) => {
-                setNewSeason({
-                  ...newSeason,
-                  startDate: d.toISOString().substring(0, 10),
-                });
-              }}
-              showClearButton={false}
-              showTodayButton={false}
-            />
+            >
+              Start Date
+            </RequiredLabel>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant={"outline"}
+                  className={cn(
+                    "w-[280px] justify-start text-left font-normal",
+                    !newSeason.startDate && "text-muted-foreground",
+                    error && newSeason.startDate === "" && "border-red-500",
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {newSeason.startDate ? (
+                    format(newSeason.startDate, "PPP")
+                  ) : (
+                    <span>Pick a date</span>
+                  )}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <Calendar
+                  mode="single"
+                  selected={new Date(newSeason.startDate)}
+                  onSelect={(d) =>
+                    { setNewSeason({
+                      ...newSeason,
+                      startDate: d?.toISOString().substring(0, 10) ?? "",
+                    }); }
+                  }
+                  autoFocus
+                />
+              </PopoverContent>
+            </Popover>
           </div>
           <div className="row-start-2">
             <RequiredLabel
               htmlFor="endDate"
-              value="End Date"
-              color={error && newSeason.endDate === "" ? "failure" : undefined}
-            />
-            <Datepicker
-              id="endDate"
-              value={newSeason.endDate}
-              color={error && newSeason.endDate === "" ? "failure" : undefined}
-              onSelectedDateChanged={(d) => {
-                setNewSeason({
-                  ...newSeason,
-                  endDate: d.toISOString().substring(0, 10),
-                });
-              }}
-              showClearButton={false}
-              showTodayButton={false}
-            />
+              className={
+                error && newSeason.endDate === "" ? "text-red-500" : ""
+              }
+            >
+              End Date
+            </RequiredLabel>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant={"outline"}
+                  className={cn(
+                    "w-[280px] justify-start text-left font-normal",
+                    !newSeason.endDate && "text-muted-foreground",
+                    error && newSeason.endDate === "" && "border-red-500",
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {newSeason.endDate ? (
+                    format(newSeason.endDate, "PPP")
+                  ) : (
+                    <span>Pick a date</span>
+                  )}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <Calendar
+                  mode="single"
+                  selected={new Date(newSeason.endDate)}
+                  onSelect={(d) =>
+                    { setNewSeason({
+                      ...newSeason,
+                      endDate: d?.toISOString().substring(0, 10) ?? "",
+                    }); }
+                  }
+                  autoFocus
+                />
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
         <div className="pt-4">
           <div className="flex">
-            <Label value="Bye Weeks" />
+            <Label>Bye Weeks</Label>
             <Button
-              size="xs"
+              size="sm"
               className="ml-2"
               onClick={() => {
                 setNewSeason({
@@ -214,9 +264,7 @@ export function AdminSeasonsPage() {
                     });
                   }}
                   value={bye}
-                  color={error && bye === "" ? "failure" : undefined}
-                  showClearButton={false}
-                  showTodayButton={false}
+                  className={error && bye === "" ? "border-red-500" : ""}
                   onDelete={() => {
                     setNewSeason({
                       ...newSeason,

@@ -1,9 +1,14 @@
 import { useContext } from "react";
 
-import { Select } from "flowbite-react";
-
 import { useGetSeasons } from "@/hooks/http";
 import { SeasonContext } from "@/state/season";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export interface SeasonsSelectProps {
   showAddSeason?: boolean;
@@ -22,49 +27,48 @@ export function SeasonsSelect({ showAddSeason = false }: SeasonsSelectProps) {
 
   return (
     <Select
-      onChange={(e) => {
-        const idx = e.target.selectedIndex;
-        if (showAddSeason) {
-          if (idx === 0) {
-            setSeason(undefined);
-            return;
-          }
-
-          setSeason(sortedSeasons[idx - 2]);
+      onValueChange={(v) => {
+        if (v === "add-new") {
+          setSeason(undefined);
           return;
         }
-        setSeason(sortedSeasons[idx]);
+        setSeason(sortedSeasons.find((s) => s.id === v));
       }}
       disabled={loadingOrError || (noOptions && !showAddSeason)}
       value={loadingOrError || noOptions ? "disabled" : season?.id}
     >
-      {loadingOrError && (
-        <option value="disabled" disabled>
-          Seasons Loading...
-        </option>
-      )}
-      {noOptions && !showAddSeason && (
-        <option value="disabled" disabled>
-          No Seasons Exist
-        </option>
-      )}
-      {!loadingOrError && (
-        <>
-          {showAddSeason && (
-            <>
-              <option>Add a new season</option>
-              <option disabled>{"-".repeat(40)}</option>
-            </>
-          )}
-          {sortedSeasons.map((season) => {
-            return (
-              <option key={season.id} value={season.id}>
-                {season.name}
-              </option>
-            );
-          })}
-        </>
-      )}
+      <SelectTrigger>
+        <SelectValue placeholder={loadingOrError ? "Seasons Loading..." : "Select a season"} />
+      </SelectTrigger>
+      <SelectContent>
+        {loadingOrError && (
+          <SelectItem value="disabled" disabled>
+            Seasons Loading...
+          </SelectItem>
+        )}
+        {noOptions && !showAddSeason && (
+          <SelectItem value="disabled" disabled>
+            No Seasons Exist
+          </SelectItem>
+        )}
+        {!loadingOrError && (
+          <>
+            {showAddSeason && (
+              <>
+                <SelectItem value="add-new">Add a new season</SelectItem>
+                <SelectItem value="disabled-separator" disabled>{"-".repeat(40)}</SelectItem>
+              </>
+            )}
+            {sortedSeasons.map((season) => {
+              return (
+                <SelectItem key={season.id} value={season.id}>
+                  {season.name}
+                </SelectItem>
+              );
+            })}
+          </>
+        )}
+      </SelectContent>
     </Select>
   );
 }

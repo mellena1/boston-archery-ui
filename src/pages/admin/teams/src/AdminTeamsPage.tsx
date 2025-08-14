@@ -1,11 +1,12 @@
 import { useState } from "react";
-
-import { Button, Label, TextInput } from "flowbite-react";
 import { type SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { HiPlus } from "react-icons/hi";
 import { useTitle } from "react-use";
 
 import { ColorRow } from "./ColorRow";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { RequiredLabel } from "@/components/form";
 import { TeamsSelect } from "@/components/teams-select";
 import { type Team } from "@/models/team";
@@ -51,10 +52,11 @@ export function AdminTeamsPage() {
           <div className="col-span-1">
             <RequiredLabel
               htmlFor="name"
-              value="Name"
               // color={error && newSeason.name === "" ? "failure" : undefined}
-            />
-            <TextInput
+            >
+              Name
+            </RequiredLabel>
+            <Input
               id="name"
               type="text"
               {...register("name", { required: true })}
@@ -71,9 +73,9 @@ export function AdminTeamsPage() {
         </div>
         <div className="pt-4">
           <div className="flex">
-            <Label value="Team Colors" />
+            <Label>Team Colors</Label>
             <Button
-              size="xs"
+              size="sm"
               className="ml-2"
               onClick={() => {
                 append({ val: "#ff0000" });

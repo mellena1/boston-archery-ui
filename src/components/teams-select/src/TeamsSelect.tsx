@@ -1,9 +1,14 @@
 import React from "react";
 
-import { Select } from "flowbite-react";
-
 import { useGetTeams } from "@/hooks/http";
 import { type Team } from "@/models/team";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export interface TeamsSelectProps {
   showAddTeam?: boolean;
@@ -25,48 +30,48 @@ export function TeamsSelect({
 
   return (
     <Select
-      onChange={(e) => {
-        const idx = e.target.selectedIndex;
-        if (showAddTeam) {
-          if (idx === 0) {
-            setSelectedTeam(undefined);
-            return;
-          }
-
-          setSelectedTeam(sortedTeams[idx - 2]);
+      onValueChange={(v) => {
+        if (v === "add-new") {
+          setSelectedTeam(undefined);
           return;
         }
+        setSelectedTeam(sortedTeams.find((t) => t.id === v));
       }}
       disabled={loadingOrError || (noOptions && !showAddTeam)}
       value={loadingOrError || noOptions ? "disabled" : selectedTeamId}
     >
-      {loadingOrError && (
-        <option value="disabled" disabled>
-          Teams Loading...
-        </option>
-      )}
-      {noOptions && !showAddTeam && (
-        <option value="disabled" disabled>
-          No Teams Exist
-        </option>
-      )}
-      {!loadingOrError && (
-        <>
-          {showAddTeam && (
-            <>
-              <option>Add a new team</option>
-              <option disabled>{"-".repeat(40)}</option>
-            </>
-          )}
-          {sortedTeams.map((team) => {
-            return (
-              <option key={team.id} value={team.id}>
-                {team.name}
-              </option>
-            );
-          })}
-        </>
-      )}
+      <SelectTrigger>
+        <SelectValue placeholder={loadingOrError ? "Teams Loading..." : "Select a team"} />
+      </SelectTrigger>
+      <SelectContent>
+        {loadingOrError && (
+          <SelectItem value="disabled" disabled>
+            Teams Loading...
+          </SelectItem>
+        )}
+        {noOptions && !showAddTeam && (
+          <SelectItem value="disabled" disabled>
+            No Teams Exist
+          </SelectItem>
+        )}
+        {!loadingOrError && (
+          <>
+            {showAddTeam && (
+              <>
+                <SelectItem value="add-new">Add a new team</SelectItem>
+                <SelectItem value="disabled-separator" disabled>{"-".repeat(40)}</SelectItem>
+              </>
+            )}
+            {sortedTeams.map((team) => {
+              return (
+                <SelectItem key={team.id} value={team.id}>
+                  {team.name}
+                </SelectItem>
+              );
+            })}
+          </>
+        )}
+      </SelectContent>
     </Select>
   );
 }

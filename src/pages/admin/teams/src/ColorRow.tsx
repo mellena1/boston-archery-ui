@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
-
-import { Button, getTheme } from "flowbite-react";
 import { HexColorInput, HexColorPicker } from "react-colorful";
 import { HiTrash } from "react-icons/hi";
 import { useClickAway, useDebounce } from "react-use";
-import { twMerge } from "tailwind-merge";
+
+import { Button } from "@/components/ui/button";
+
 
 export interface ColorRowProps {
   onDelete: () => void;
@@ -76,9 +76,13 @@ function ColorInput({ color, setColor, hidden, onClick }: ColorInputProps) {
           }}
           onClick={onClick}
         />
-        <FlowbiteHexColorInput
-          selectedColor={selectedColor}
-          setSelectedColor={setSelectedColor}
+        <HexColorInput
+          className="w-full"
+          color={selectedColor}
+          onChange={(newColor) => {
+            setSelectedColor(newColor);
+          }}
+          prefixed
         />
       </div>
       {!hidden && (
@@ -92,28 +96,5 @@ function ColorInput({ color, setColor, hidden, onClick }: ColorInputProps) {
         </div>
       )}
     </>
-  );
-}
-
-interface FlowbiteHexColorInputProps {
-  selectedColor: string;
-  setSelectedColor: (newColor: string) => void;
-}
-
-function FlowbiteHexColorInput({
-  selectedColor,
-  setSelectedColor,
-}: FlowbiteHexColorInputProps) {
-  const theme = getTheme().textInput;
-
-  return (
-    <HexColorInput
-      className={twMerge(theme.field.input.base, theme.field.input.colors.gray)}
-      color={selectedColor}
-      onChange={(newColor) => {
-        setSelectedColor(newColor);
-      }}
-      prefixed
-    />
   );
 }

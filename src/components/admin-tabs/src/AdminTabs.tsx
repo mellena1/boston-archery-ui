@@ -1,5 +1,6 @@
-import { Tabs } from "flowbite-react";
-import { type Location, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const paths = ["/admin/seasons", "/admin/teams"];
 
@@ -9,18 +10,16 @@ export function AdminTabs() {
 
   return (
     <Tabs
-      aria-label="Admin tabs"
-      style="underline"
-      onActiveTabChange={(idx: number) => {
-        navigate(paths[idx]);
+      defaultValue={paths[0]}
+      onValueChange={(v) => {
+        navigate(v);
       }}
+      value={location.pathname}
     >
-      <Tabs.Item title="Seasons" active={isActive(location, 0)} />
-      <Tabs.Item title="Teams" active={isActive(location, 1)} />
+      <TabsList>
+        <TabsTrigger value={paths[0]}>Seasons</TabsTrigger>
+        <TabsTrigger value={paths[1]}>Teams</TabsTrigger>
+      </TabsList>
     </Tabs>
   );
-}
-
-function isActive(location: Location, idx: number): boolean {
-  return paths.indexOf(location.pathname) === idx;
 }
