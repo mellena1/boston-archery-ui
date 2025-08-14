@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
+
 import { HexColorInput, HexColorPicker } from "react-colorful";
 import { HiTrash } from "react-icons/hi";
 import { useClickAway, useDebounce } from "react-use";
 
 import { Button } from "@/components/ui/button";
-
 
 export interface ColorRowProps {
   onDelete: () => void;

@@ -1,11 +1,12 @@
 import { useEffect } from "react";
+
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { useTitle } from "react-use";
 
 import "./App.css";
-import { Toaster } from "@/components/ui/sonner";
 import { ProtectedRoute } from "@/components/protected-route";
+import { Toaster } from "@/components/ui/sonner";
 import { useAuthToken } from "@/hooks/auth";
 import { AdminLayout, AdminSeasonsPage, AdminTeamsPage } from "@/pages/admin";
 import { HomePage } from "@/pages/home";

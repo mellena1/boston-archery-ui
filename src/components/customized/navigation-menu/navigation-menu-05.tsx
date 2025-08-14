@@ -1,3 +1,5 @@
+import { Link, useLocation } from "react-router-dom";
+
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -5,18 +7,20 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import { Link, useLocation } from "react-router-dom";
 
 export interface NavbarMenuItem {
-  title: string
-  href: string
+  title: string;
+  href: string;
+  isActive?: (pathName: string) => boolean;
 }
 
 export interface NavigationMenuWithActiveItemProps {
-  items: NavbarMenuItem[]
+  items: NavbarMenuItem[];
 }
 
-export default function NavigationMenuWithActiveItem({ items }: NavigationMenuWithActiveItemProps) {
+export default function NavigationMenuWithActiveItem({
+  items,
+}: NavigationMenuWithActiveItemProps) {
   const location = useLocation();
 
   return (
@@ -31,14 +35,16 @@ export default function NavigationMenuWithActiveItem({ items }: NavigationMenuWi
                 "hover:before:scale-x-100 hover:text-accent-foreground",
                 "focus:before:scale-x-100 focus:text-accent-foreground focus:outline-none",
                 "disabled:pointer-events-none disabled:opacity-50",
-                "data-[active]:before:scale-x-100 data-[state=open]:before:scale-x-100"
+                "data-[active]:before:scale-x-100 data-[state=open]:before:scale-x-100",
               )}
               asChild
-              active={location.pathname === item.href}
+              active={
+                item.isActive === undefined
+                  ? location.pathname === item.href
+                  : item.isActive(location.pathname)
+              }
             >
-              <Link to={item.href}>
-                {item.title}
-              </Link>
+              <Link to={item.href}>{item.title}</Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
         ))}

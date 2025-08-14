@@ -1,9 +1,13 @@
-import { format } from "date-fns";
 import { useContext, useEffect, useState } from "react";
+
+import { format } from "date-fns";
 import { HiCalendar as CalendarIcon, HiPlus } from "react-icons/hi";
 import { useTitle } from "react-use";
 
 import { ByeWeekRow } from "./ByeWeekRow";
+import { RequiredLabel } from "@/components/form";
+import { ErrorToast } from "@/components/popups";
+import { SeasonsSelect } from "@/components/seasons-select";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
@@ -13,9 +17,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { RequiredLabel } from "@/components/form";
-import { ErrorToast } from "@/components/popups";
-import { SeasonsSelect } from "@/components/seasons-select";
 import { useAddSeason, useGetSeasons, useUpdateSeason } from "@/hooks/http";
 import { cn } from "@/lib/utils";
 import { type Season } from "@/models/season";
@@ -180,12 +181,12 @@ export function AdminSeasonsPage() {
                 <Calendar
                   mode="single"
                   selected={new Date(newSeason.startDate)}
-                  onSelect={(d) =>
-                    { setNewSeason({
+                  onSelect={(d) => {
+                    setNewSeason({
                       ...newSeason,
                       startDate: d?.toISOString().substring(0, 10) ?? "",
-                    }); }
-                  }
+                    });
+                  }}
                   autoFocus
                 />
               </PopoverContent>
@@ -222,12 +223,12 @@ export function AdminSeasonsPage() {
                 <Calendar
                   mode="single"
                   selected={new Date(newSeason.endDate)}
-                  onSelect={(d) =>
-                    { setNewSeason({
+                  onSelect={(d) => {
+                    setNewSeason({
                       ...newSeason,
                       endDate: d?.toISOString().substring(0, 10) ?? "",
-                    }); }
-                  }
+                    });
+                  }}
                   autoFocus
                 />
               </PopoverContent>

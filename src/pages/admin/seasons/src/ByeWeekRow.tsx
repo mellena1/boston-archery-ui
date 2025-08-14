@@ -40,7 +40,9 @@ export function ByeWeekRow(props: ByeWeekRowProps) {
             <Calendar
               mode="single"
               selected={new Date(value)}
-              onSelect={(d) => { onSelectedDateChanged(d ?? new Date()); }}
+              onSelect={(d) => {
+                onSelectedDateChanged(d ?? new Date());
+              }}
               autoFocus
             />
           </PopoverContent>

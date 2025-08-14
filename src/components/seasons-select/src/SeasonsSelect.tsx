@@ -1,7 +1,5 @@
 import { useContext } from "react";
 
-import { useGetSeasons } from "@/hooks/http";
-import { SeasonContext } from "@/state/season";
 import {
   Select,
   SelectContent,
@@ -9,6 +7,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useGetSeasons } from "@/hooks/http";
+import { SeasonContext } from "@/state/season";
 
 export interface SeasonsSelectProps {
   showAddSeason?: boolean;
@@ -38,7 +38,11 @@ export function SeasonsSelect({ showAddSeason = false }: SeasonsSelectProps) {
       value={loadingOrError || noOptions ? "disabled" : season?.id}
     >
       <SelectTrigger>
-        <SelectValue placeholder={loadingOrError ? "Seasons Loading..." : "Select a season"} />
+        <SelectValue
+          placeholder={
+            loadingOrError ? "Seasons Loading..." : "Select a season"
+          }
+        />
       </SelectTrigger>
       <SelectContent>
         {loadingOrError && (
@@ -56,7 +60,9 @@ export function SeasonsSelect({ showAddSeason = false }: SeasonsSelectProps) {
             {showAddSeason && (
               <>
                 <SelectItem value="add-new">Add a new season</SelectItem>
-                <SelectItem value="disabled-separator" disabled>{"-".repeat(40)}</SelectItem>
+                <SelectItem value="disabled-separator" disabled>
+                  {"-".repeat(40)}
+                </SelectItem>
               </>
             )}
             {sortedSeasons.map((season) => {

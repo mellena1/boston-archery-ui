@@ -1,14 +1,15 @@
 import { useState } from "react";
+
 import { type SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { HiPlus } from "react-icons/hi";
 import { useTitle } from "react-use";
 
 import { ColorRow } from "./ColorRow";
+import { RequiredLabel } from "@/components/form";
+import { TeamsSelect } from "@/components/teams-select";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { RequiredLabel } from "@/components/form";
-import { TeamsSelect } from "@/components/teams-select";
 import { type Team } from "@/models/team";
 
 interface FormInput {

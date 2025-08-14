@@ -1,7 +1,5 @@
 import React from "react";
 
-import { useGetTeams } from "@/hooks/http";
-import { type Team } from "@/models/team";
 import {
   Select,
   SelectContent,
@@ -9,6 +7,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useGetTeams } from "@/hooks/http";
+import { type Team } from "@/models/team";
 
 export interface TeamsSelectProps {
   showAddTeam?: boolean;
@@ -41,7 +41,9 @@ export function TeamsSelect({
       value={loadingOrError || noOptions ? "disabled" : selectedTeamId}
     >
       <SelectTrigger>
-        <SelectValue placeholder={loadingOrError ? "Teams Loading..." : "Select a team"} />
+        <SelectValue
+          placeholder={loadingOrError ? "Teams Loading..." : "Select a team"}
+        />
       </SelectTrigger>
       <SelectContent>
         {loadingOrError && (
@@ -59,7 +61,9 @@ export function TeamsSelect({
             {showAddTeam && (
               <>
                 <SelectItem value="add-new">Add a new team</SelectItem>
-                <SelectItem value="disabled-separator" disabled>{"-".repeat(40)}</SelectItem>
+                <SelectItem value="disabled-separator" disabled>
+                  {"-".repeat(40)}
+                </SelectItem>
               </>
             )}
             {sortedTeams.map((team) => {

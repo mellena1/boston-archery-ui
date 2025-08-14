@@ -1,4 +1,5 @@
 import { type PropsWithChildren, useEffect } from "react";
+
 import { toast } from "sonner";
 
 export type ErrorToastProps = {

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { AuthActionTypes, AuthContext, type AuthState } from "@/state/auth";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { AuthActionTypes, AuthContext, type AuthState } from "@/state/auth";
 
 const DISCORD_CDN = "https://cdn.discordapp.com";
 const AVATAR_SIZE = 64;
@@ -54,10 +54,8 @@ function avatarLink(authState: AuthState): string {
 }
 
 function getInitials(authState: AuthState): string {
-  return (
-    authState.userInfo.nickname
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-  );
+  return authState.userInfo.nickname
+    .split(" ")
+    .map((n) => n[0])
+    .join("");
 }
