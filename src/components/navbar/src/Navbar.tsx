@@ -24,8 +24,8 @@ export function Navbar() {
   ];
 
   return (
-    <div className="flex justify-between items-center border-b-2 border-yellow-300 py-2.5 px-2 sm:px-4 bg-emerald-900 shadow-lg">
-      <div>Boston Combat Archery</div>
+    <div className="flex justify-between items-center border-b-2 border-secondary py-2.5 px-2 sm:px-4 bg-primary shadow-lg">
+      <div className="text-accent">Combat Archery Boston</div>
       <NavigationMenuWithActiveItem items={navBarItems} />
       <div className="flex md:order-2 space-x-2">
         <Login />

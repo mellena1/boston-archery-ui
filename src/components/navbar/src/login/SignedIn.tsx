@@ -20,7 +20,7 @@ export function SignedIn() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar>
+        <Avatar className="ring-2 ring-secondary">
           <AvatarImage src={avatarLink(authState)} />
           <AvatarFallback>{getInitials(authState)}</AvatarFallback>
         </Avatar>
